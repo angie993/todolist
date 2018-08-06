@@ -79,20 +79,19 @@ var view = {
     displayTodos: function () {
         var todoUl = document.querySelector('ul');
         todoUl.innerHTML = '';
-        for (var i = 0; i < todoListObj.todos.length; i++) {
+        todoListObj.todos.forEach(function(todo,position){
             var todoLi = document.createElement('li');
-            var todo = todoListObj.todos[i];
             var todoWithInfo = '';
             if (todo.completed === true) {
                 todoWithInfo = '(x) ' + todo.todoText;
             } else {
                 todoWithInfo = '( ) ' + todo.todoText;
             }
-            todoLi.id = i;
+            todoLi.id = position;
             todoLi.textContent = todoWithInfo;
             todoLi.appendChild(this.createDeleteButton());
             todoUl.appendChild(todoLi);
-        }
+        }, this);
     },
     createDeleteButton: function () {
         var deleteButton = document.createElement('button');
